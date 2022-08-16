@@ -1,15 +1,16 @@
-// Dpp include
+// External include
 #include <dpp/dpp.h>
 #include <dpp/nlohmann/json.hpp>
-
-// Using shorten
-using json = nlohmann::json;
+#include <spdlog/spdlog.h>
 
 // Cpp include
 #include <iostream>
 #include <fstream>
 
-int main()
+// Using shorten
+using json = nlohmann::json;
+
+int main(int argc, char* argv[])
 {
 	// JSON reading setup
 	json reader;
@@ -19,16 +20,22 @@ int main()
 		reading.close();
 	}
 
-	// Constant variables
+	// Constant
 	const std::string token = reader["token"];
 
-	// Bot access, with intents 32767 like JS
+	// Intents for bot
 	dpp::cluster client(token, dpp::i_all_intents);
 
-	// Console log (if you don't want to log, just do the note like me)
+	// Logging bot status on console
 	client.on_log(dpp::utility::cout_logger());
 
-	// Bot start
+	// Logging announcement
+	client.on_ready([&client](const dpp::ready_t& event) {
+		spdlog::info("\n{} has launched!\n", client.me.format_username());
+		client.set_presence(dpp::presence(dpp::ps_dnd, dpp::at_game, "Genshin Impact"));
+		});
+
+	// Starting the bot
 	client.start(false);
 	return 0;
 }
