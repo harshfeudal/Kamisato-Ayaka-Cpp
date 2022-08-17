@@ -12,6 +12,7 @@
 // Project include
 #include "commands/handler.h"
 #include "commands/ping.h"
+#include "commands/info.h"
 
 // Using shorten
 using json = nlohmann::json;
@@ -22,6 +23,9 @@ std::map<std::string, cmd_def> commands
 	// Inspired JSON style, remember the name is lowercase
 	{
 		"ping", { "Check Ayaka latecy", ping_h }
+	},
+	{
+		"info", { "Show Ayaka information", info_h }
 	},
 };
 
