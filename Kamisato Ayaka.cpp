@@ -21,7 +21,7 @@ std::map<std::string, cmd_def> commands
 {
 	// Inspired JSON style, remember the name is lowercase
 	{
-		"ping", { "Check Asuna latecy", ping_h }
+		"ping", { "Check Ayaka latecy", ping_h }
 	},
 };
 
