@@ -1,7 +1,7 @@
 // External include
 #include <dpp/dpp.h>
 #include <dpp/nlohmann/json.hpp>
-#include <spdlog/spdlog.h>
+#include <spdlog/fmt/fmt.h>
 
 // Cpp include
 #include <iostream>
@@ -26,12 +26,9 @@ int main(int argc, char* argv[])
 	// Intents for bot
 	dpp::cluster client(token, dpp::i_all_intents);
 
-	// Logging bot status on console
-	client.on_log(dpp::utility::cout_logger());
-
 	// Logging announcement
 	client.on_ready([&client](const dpp::ready_t& event) {
-		spdlog::info("\n{} has launched!\n", client.me.format_username());
+		fmt::print("{} has launched!\n", client.me.format_username());
 		client.set_presence(dpp::presence(dpp::ps_dnd, dpp::at_game, "Genshin Impact"));
 		});
 
