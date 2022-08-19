@@ -404,3 +404,7 @@ FodyWeavers.xsd
 **.vcxproj.filters
 **.vcxproj.user
 config.json
+
+# Others
+**.exe
+include/*
